@@ -57,7 +57,7 @@ screen = pygame.display.set_mode((432,768))
 clock = pygame.time.Clock()
 game_font = pygame.font.Font('04B_19.ttf',40)
 # tạo biến trò chơi
-gravity = 0.25
+gravity = 0.20
 bird_move = 0
 game_ac = True
 score = 0
@@ -87,8 +87,8 @@ pipe_sur = pygame.transform.scale2x(pipe_sur)
 pipe_list = []
 # tạo timer
 spawnpipe = pygame.USEREVENT
-pygame.time.set_timer(spawnpipe, 1200)
-pipe_hei = [150,250,350]
+pygame.time.set_timer(spawnpipe, 700)
+pipe_hei = [150,300,250,400]
 # bg end
 game_over_sur = pygame.transform.scale2x(pygame.image.load('assets/message.png').convert_alpha())
 game_over_rect = game_over_sur.get_rect(center= (216,384))
@@ -106,12 +106,12 @@ while True:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_SPACE and game_ac:
                 bird_move = 0
-                bird_move = -11
+                bird_move = -10
                 flap_sound.play()
             if event.key == pygame.K_SPACE and game_ac == False:
                 game_ac = True
                 pipe_list.clear()
-                bird_rect.center = (100,384)
+                bird_rect.center = (90,384)
                 bird_move = 0
                 score = 0
         if event.type == spawnpipe:
@@ -134,7 +134,7 @@ while True:
         # ống
         pipe_list = move_pipe(pipe_list)
         draw_pipe(pipe_list)
-        score += 0.01
+        score += 0.1
         score_dis('main game')
         score_sound_countdown -= 1
         if score_sound_countdown <= 0:
